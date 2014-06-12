@@ -103,9 +103,21 @@ namespace KPEnhancedEntryView
 			if (newValue.ReadString() != rowObject.Value.ReadString())
 			{
 				CreateHistoryEntry();
-
-				Entry.Strings.Set(rowObject.FieldName, newValue);
-				rowObject.Value = newValue;
+				string val = newValue.ReadString();
+				if (val.StartsWith("="))
+				{
+					SprContext ctx = new SprContext(Entry, KeePass.Program.MainForm.DocumentManager.FindContainerOf(Entry),
+										SprCompileFlags.All, false, false);
+					val = SprEngine.Compile(val.Substring(1), ctx);
+					ProtectedString psval = new ProtectedString(newValue.IsProtected, val);
+					Entry.Strings.Set(rowObject.FieldName, psval);
+					rowObject.Value = psval;
+				}
+				else
+				{
+					Entry.Strings.Set(rowObject.FieldName, newValue);
+					rowObject.Value = newValue;
+				}
 
 				OnModified(EventArgs.Empty);
 			}

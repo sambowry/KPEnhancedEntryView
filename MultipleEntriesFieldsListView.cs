@@ -273,12 +273,23 @@ namespace KPEnhancedEntryView
 					{
 						entry.CreateBackup(Database);
 					}
-
-					entry.Strings.Set(rowObject.FieldName, newValue); // ProtectedStrings are immutable, so OK to assign the same one to all entries
+					string val = newValue.ReadString();
+					if (val.StartsWith("="))
+					{
+						SprContext ctx = new SprContext(entry, KeePass.Program.MainForm.DocumentManager.FindContainerOf(entry),
+											SprCompileFlags.All, false, false);
+						val = SprEngine.Compile(val.Substring(1), ctx);
+						ProtectedString psval = new ProtectedString(newValue.IsProtected, val);
+						entry.Strings.Set(rowObject.FieldName, psval);
+						OnEntriesChanged(EventArgs.Empty);
+					}
+					else
+					{
+						entry.Strings.Set(rowObject.FieldName, newValue); // ProtectedStrings are immutable, so OK to assign the same one to all entries
+						rowObject.Value = newValue;
+					}
+					OnModified(EventArgs.Empty);
 				}
-				rowObject.Value = newValue;
-
-				OnModified(EventArgs.Empty);
 			}
 		}
 
