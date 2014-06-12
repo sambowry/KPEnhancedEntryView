@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPEnhancedEntryView", "KPEnhancedEntryView.csproj", "{83E5E035-7E8F-4AE7-B22C-F3816D8DA4AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView2010", "..\ThirdPartyAssemblies\ObjectListViewDemo\ObjectListView\ObjectListView2010.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E448F3C9-FC22-49FD-9760-602C3C3DD5C1}"
+	ProjectSection(SolutionItems) = preProject
+		..\Development.txt = ..\Development.txt
+		..\Releases\PackageRelease.bat = ..\Releases\PackageRelease.bat
+		..\Readme.txt = ..\Readme.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83E5E035-7E8F-4AE7-B22C-F3816D8DA4AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83E5E035-7E8F-4AE7-B22C-F3816D8DA4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83E5E035-7E8F-4AE7-B22C-F3816D8DA4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83E5E035-7E8F-4AE7-B22C-F3816D8DA4AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
