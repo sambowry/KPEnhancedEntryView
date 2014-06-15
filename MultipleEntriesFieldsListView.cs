@@ -275,8 +275,7 @@ namespace KPEnhancedEntryView
 				{
 					foreach (var entry in allEntries)
 					{
-						SprContext ctx = new SprContext(entry, KeePass.Program.MainForm.DocumentManager.FindContainerOf(entry),
-											SprCompileFlags.All, false, false);
+						SprContext ctx = new SprContext(entry, Database, SprCompileFlags.All, false, false);
 						entry.Strings.Set(rowObject.FieldName,
 							new ProtectedString(newValue.IsProtected, SprEngine.Compile(val.Substring(1), ctx)));
 					}

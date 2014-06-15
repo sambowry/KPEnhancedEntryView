@@ -292,7 +292,7 @@ namespace KPEnhancedEntryView
 			{
 				if (rowObject.Value != null && !rowObject.Value.IsProtected)
 				{
-					var value = rowObject.Value.ReadString();
+					var value = GetDisplayValue(rowObject.Value, true);
 					Uri uri;
 					var match = EntryView.MarkedLinkRegex.Match(value);
 					if (match.Success && match.Length == value.Length) // It's a URL if the whole thing matches marked link syntax (< > wrapped)

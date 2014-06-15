@@ -106,8 +106,7 @@ namespace KPEnhancedEntryView
 				string val = newValue.ReadString();
 				if (val.StartsWith("="))
 				{
-					SprContext ctx = new SprContext(Entry, KeePass.Program.MainForm.DocumentManager.FindContainerOf(Entry),
-										SprCompileFlags.All, false, false);
+					SprContext ctx = new SprContext(Entry, Database, SprCompileFlags.All, false, false);
 					val = SprEngine.Compile(val.Substring(1), ctx);
 					ProtectedString psval = new ProtectedString(newValue.IsProtected, val);
 					Entry.Strings.Set(rowObject.FieldName, psval);
@@ -118,7 +117,6 @@ namespace KPEnhancedEntryView
 					Entry.Strings.Set(rowObject.FieldName, newValue);
 					rowObject.Value = newValue;
 				}
-
 				OnModified(EventArgs.Empty);
 			}
 		}
