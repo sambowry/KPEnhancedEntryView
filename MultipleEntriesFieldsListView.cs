@@ -267,28 +267,17 @@ namespace KPEnhancedEntryView
 				ConfirmOperationOnAllEntries(String.Format(Properties.Resources.MultipleEntryFieldSetValueQuestion, rowObject.DisplayName), Properties.Resources.MultpleEntryFieldSetValueCommand, allEntries))
 			{
 				var createBackups = AllowCreateHistoryNow;
-				string val = newValue.ReadString();
-				if (createBackups)
-					foreach (var entry in allEntries)
+				foreach (var entry in allEntries)
+				{
+					if (createBackups)
+					{
 						entry.CreateBackup(Database);
-				if (val.StartsWith("="))
-				{
-					foreach (var entry in allEntries)
-					{
-						SprContext ctx = new SprContext(entry, Database, SprCompileFlags.All, false, false);
-						entry.Strings.Set(rowObject.FieldName,
-							new ProtectedString(newValue.IsProtected, SprEngine.Compile(val.Substring(1), ctx)));
 					}
-					OnEntriesChanged(EventArgs.Empty);
+
+					entry.Strings.Set(rowObject.FieldName, newValue); // ProtectedStrings are immutable, so OK to assign the same one to all entries
 				}
-				else
-				{
-					foreach (var entry in allEntries)
-					{
-						entry.Strings.Set(rowObject.FieldName, newValue); // ProtectedStrings are immutable, so OK to assign the same one to all entries
-						rowObject.Value = newValue;
-					}
-				}
+				rowObject.Value = newValue;
+
 				OnModified(EventArgs.Empty);
 			}
 		}
@@ -304,7 +293,7 @@ namespace KPEnhancedEntryView
 				var isProtected = false; // Default to not protected
 				var fieldOnOtherEntry = (from entry in Entries
 										 from groupEntry in entry.ParentGroup.Entries
-										 select groupEntry.Strings.Get(newName)).FirstOrDefault();
+											select groupEntry.Strings.Get(newName)).FirstOrDefault();
 
 				if (fieldOnOtherEntry != null)
 				{

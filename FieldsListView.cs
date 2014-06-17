@@ -540,7 +540,7 @@ namespace KPEnhancedEntryView
 
 		private void OpenURLCommand(RowObject rowObject)
 		{
-			OnHyperlinkClicked(new HyperlinkClickedEventArgs { Url = rowObject.Value.ReadString() });
+			OnHyperlinkClicked(new HyperlinkClickedEventArgs { Url = GetDisplayValue(rowObject.Value, true) });
 		}
 
 		protected abstract void CopyCommand(RowObject rowObject);
@@ -856,7 +856,7 @@ namespace KPEnhancedEntryView
 		private static readonly TimeSpan MinimumHistoryCreationPeriod = TimeSpan.FromMinutes(1);
 		private DateTime? mLastEdited;
 
-		protected bool AllowCreateHistoryNow
+		public bool AllowCreateHistoryNow
 		{
 			get
 			{
