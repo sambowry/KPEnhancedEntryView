@@ -12,7 +12,7 @@ namespace KPEnhancedEntryView
 {
 	internal class SingleEntryFieldsListView : FieldsListView
 	{
-		public SingleEntryFieldsListView() 
+		public SingleEntryFieldsListView()
 		{
 		}
 
@@ -89,7 +89,7 @@ namespace KPEnhancedEntryView
 				e.Cancel = true;
 				return;
 			}
-			
+
 			if (Entry.Strings.Exists(newValue))
 			{
 				ReportValidationFailure(e.Control, KPRes.FieldNameExistsAlready);
@@ -97,7 +97,30 @@ namespace KPEnhancedEntryView
 				return;
 			}
 		}
-
+		/*
+		protected override void SetFieldValueInternal(RowObject rowObject, ProtectedString newValue)
+		{
+			if (newValue.ReadString() != rowObject.Value.ReadString())
+			{
+				CreateHistoryEntry();
+				string val = newValue.ReadString();
+				if (val.StartsWith("="))
+				{
+					SprContext ctx = new SprContext(Entry, Database, SprCompileFlags.All, false, false);
+					val = SprEngine.Compile(val.Substring(1), ctx);
+					ProtectedString psval = new ProtectedString(newValue.IsProtected, val);
+					Entry.Strings.Set(rowObject.FieldName, psval);
+					rowObject.Value = psval;
+				}
+				else
+				{
+					Entry.Strings.Set(rowObject.FieldName, newValue);
+					rowObject.Value = newValue;
+				}
+				OnModified(EventArgs.Empty);
+			}
+		}
+		*/
 		protected override void SetFieldValueInternal(RowObject rowObject, ProtectedString newValue)
 		{
 			if (newValue.ReadString() != rowObject.Value.ReadString())
