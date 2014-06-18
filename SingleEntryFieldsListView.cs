@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define TRACE
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BrightIdeasSoftware;
@@ -97,30 +99,22 @@ namespace KPEnhancedEntryView
 				return;
 			}
 		}
+
 		/*
 		protected override void SetFieldValueInternal(RowObject rowObject, ProtectedString newValue)
 		{
 			if (newValue.ReadString() != rowObject.Value.ReadString())
 			{
 				CreateHistoryEntry();
-				string val = newValue.ReadString();
-				if (val.StartsWith("="))
-				{
-					SprContext ctx = new SprContext(Entry, Database, SprCompileFlags.All, false, false);
-					val = SprEngine.Compile(val.Substring(1), ctx);
-					ProtectedString psval = new ProtectedString(newValue.IsProtected, val);
-					Entry.Strings.Set(rowObject.FieldName, psval);
-					rowObject.Value = psval;
-				}
-				else
-				{
-					Entry.Strings.Set(rowObject.FieldName, newValue);
-					rowObject.Value = newValue;
-				}
+
+				Entry.Strings.Set(rowObject.FieldName, newValue);
+				rowObject.Value = newValue;
+
 				OnModified(EventArgs.Empty);
 			}
 		}
 		*/
+
 		protected override void SetFieldValueInternal(RowObject rowObject, ProtectedString newValue)
 		{
 			if (newValue.ReadString() != rowObject.Value.ReadString())
@@ -222,6 +216,7 @@ namespace KPEnhancedEntryView
 		#region Field dereferencing
 		protected override string GetDisplayValue(ProtectedString value, bool revealValues)
 		{
+			System.Windows.Forms.MessageBox.Show("GetDisplayValue: " + System.Environment.StackTrace);
 			return SprEngine.Compile(value.ReadString(), new SprContext(Entry, Database, SprCompileFlags.All) { ForcePlainTextPasswords = revealValues });
 		}
 		#endregion

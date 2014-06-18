@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define TRACE
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -159,7 +161,6 @@ namespace KPEnhancedEntryView
 
 			// This doesn't inherit automatically, for some reason
 			HyperlinkStyle.Over.Font = Font;
-
 			RefreshItems();
 		}
 

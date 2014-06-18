@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define TRACE
+
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
@@ -92,7 +94,7 @@ namespace KPEnhancedEntryView
 		private void mEntitiesListView_Invalidated(object sender, InvalidateEventArgs e)
 		{
 			// Whenever the entities list is invalidated, refresh the items of the entry view too (so that changes like column value hiding get reflected)
-			mEntryView.RefreshItems();
+			//mEntryView.RefreshItems();
 		}
 
 		private void mOriginalEntryView_FontChanged(object sender, EventArgs e)
